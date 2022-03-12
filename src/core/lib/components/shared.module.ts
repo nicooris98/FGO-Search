@@ -6,6 +6,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { TableModule } from 'primeng/table';
     ButtonModule,
     InputTextModule,
     TableModule,
+    ImageModule,
   ],
   exports: [
     CardModule,
@@ -25,6 +27,7 @@ import { TableModule } from 'primeng/table';
     ButtonModule,
     InputTextModule,
     TableModule,
+    ImageModule,
   ],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],

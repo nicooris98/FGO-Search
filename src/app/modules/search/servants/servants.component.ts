@@ -22,14 +22,11 @@ export class ServantsComponent {
   async searchByName(name: string) {
     if (name !== '') {
       this.loading = true
-      /* await this.servantsService
-        .getServantsByName(name)
-        .subscribe(data => {
-            this.servants = data
-            console.log(this.servants)
-        }); */
         this.servants = await this.servantsService.getServantsByName(name)
         this.loading = false
+        /* this.servants.subscribe(data => data.forEach(element => {
+          console.log(element.extraAssets)
+        })) */
     }
   }
 }

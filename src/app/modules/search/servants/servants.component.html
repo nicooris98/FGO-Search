@@ -20,31 +20,151 @@
 
   <!-- <pre *ngFor="let servant of servants">{{servant | json}}</pre> -->
 
-  <p-table [value]="servants | async" [paginator]="true" [rows]="5">
+  <p-table [value]="servants | async" [paginator]="true" [rows]="5" responsiveLayout="scroll">
     <ng-template pTemplate="header">
+      <!-- sobra 10% -->
       <tr>
-        <th scope="col" pSortableColumn="name" style="width: 25%">
+        <th scope="col" style="width: 5%">
+          Image
+        </th>
+        <th scope="col" pSortableColumn="name" style="width: 15%">
           Name <p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="className" style="width: 20%">
+        <th scope="col" pSortableColumn="rarity" style="width: 10%">
+          Rarity <p-sortIcon field="rarity"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="className" style="width: 10%">
           Class <p-sortIcon field="className"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="lvMax" style="width: 15%">Max Level
-            <p-sortIcon field="lvMax"></p-sortIcon></th>
-        <th scope="col" pSortableColumn="atkMax" style="width: 15%">Max Atk
-            <p-sortIcon field="atkMax"></p-sortIcon></th>
-        <th scope="col" pSortableColumn="hpMax" style="width: 15%">Max Hp
-            <p-sortIcon field="hpMax"></p-sortIcon></th>
+        <th scope="col" pSortableColumn="lvMax" style="width: 10%">
+          Max Level <p-sortIcon field="lvMax"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="atkMax" style="width: 15%">
+          Max Atk <p-sortIcon field="atkMax"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="hpMax" style="width: 15%">
+          Max Hp <p-sortIcon field="hpMax"></p-sortIcon>
+        </th>
         <th scope="col" style="width: 10%">Detail</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-ser>
       <tr>
-        <td>{{ ser.name }}</td>
-        <td>{{ ser.className | uppercase }}</td>
+        <td>
+          <p-image
+            src="{{ser.extraAssets.charaGraph.ascension[1]}}"
+            alt="saber"
+            width="40"
+          ></p-image>
+        </td>
+        <td>
+          {{ ser.name }}
+          
+        </td>
+        <td>{{ ser.rarity }}★</td>
+        <td>
+          <container-element [ngSwitch]="ser.className">
+            <p-image
+              *ngSwitchCase="'saber'"
+              src="../../../../assets/Class-Saber-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'archer'"
+              src="../../../../assets/Class-Archer-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'lancer'"
+              src="../../../../assets/Class-Lancer-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'caster'"
+              src="../../../../assets/Class-Caster-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'assassin'"
+              src="../../../../assets/Class-Assassin-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'rider'"
+              src="../../../../assets/Class-Rider-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'berserker'"
+              src="../../../../assets/Class-Berserker-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'avenger'"
+              src="../../../../assets/Class-Avenger-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'ruler'"
+              src="../../../../assets/Class-Ruler-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'moonCancer'"
+              src="../../../../assets/Class-MoonCancer-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'foreigner'"
+              src="../../../../assets/Class-Foreigner-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'alterEgo'"
+              src="../../../../assets/Class-Alterego-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'beast'"
+              src="../../../../assets/Class-Beast.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'pretender'"
+              src="../../../../assets/Class-Pretender-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchCase="'shielder'"
+              src="../../../../assets/Class-Shielder-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+            <p-image
+              *ngSwitchDefault
+              src="../../../../assets/Class-Shielder-Gold.png"
+              alt="saber"
+              width="40"
+            ></p-image>
+          </container-element>
+        </td>
         <td>{{ ser.lvMax }}</td>
-        <td>{{ ser.atkMax }}</td>
-        <td>{{ ser.hpMax }}</td>
+        <td style="color: red;">{{ ser.atkMax }}</td>
+        <td style="color: deepskyblue;">{{ ser.hpMax }}</td>
         <td>
           <button
             pButton
@@ -57,9 +177,9 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
-        <tr>
-          <td [attr.colspan]="7">No records found</td>
-        </tr>
-      </ng-template>
+      <tr>
+        <td [attr.colspan]="7">No records found</td>
+      </tr>
+    </ng-template>
   </p-table>
 </div>
